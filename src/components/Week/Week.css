@@ -1,0 +1,4 @@
+.calendar__body__week {
+  display: flex;
+  justify-content: space-between;
+}

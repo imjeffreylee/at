@@ -1,0 +1,33 @@
+.calendar__body__day__top-bar {
+  background-color: rgb(210, 210, 210);
+  height: 5px;
+  width: 100%;
+}
+
+.calendar__body__day {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 13%;
+}
+
+.calendar__body__day__time {
+  margin-bottom: 10px;
+  color: rgb(210, 210, 210);
+}
+
+.calendar__body__day__date {
+  margin: 10px 0;
+}
+
+.calendar__body__day__date div {
+  margin-bottom: 5px;
+}
+
+.avaiable {
+  color: rgb(0, 211, 189);
+}
+
+.avail-day {
+  background-color: rgb(0, 211, 189);
+}
