@@ -3,35 +3,12 @@ import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import Week from './components/Week/Week';
 import { available, booked } from './data/getAvailableTimes.json';
 import { useEffect, useState } from 'react';
-import moment from 'moment';
+import { getTimesIn30Mins, getWholeWeek } from './util/tools';
 
 interface WeekInfo {
   date: string;
   availTimes: string[];
   bookedTimes: string[];
-}
-
-const getWholeWeek = (available: { start: string, end: string }[]) => {
-  const week = new Array(7).fill(null);
-  const targetDate = new Date(available[0].start.split('T')[0]); //get date object from an available date
-  const firstDate = new Date(moment(targetDate).subtract(targetDate.getDay(), 'days').calendar()); //calculate first date of the week
-  return week.map((day, index) => moment(firstDate).add(index, 'days').format('YYYY-MM-DD')) //get all dates of the week
-}
-
-const getTimesIn30Mins = (dateArg: string, timeFramesArray: { start: string, end: string }[]) => {
-  const times: string[] = []
-  timeFramesArray.forEach(({ start, end }) => {
-    const date = start.split('T')[0];
-    if (date === dateArg) {
-      let startTime = moment(start);
-      const endTime = moment(end);
-      while (startTime.format('HH-mm') !== endTime.format('HH-mm')) {
-        times.push(startTime.format('HH-mm'));
-        startTime = startTime.add(30, 'minutes');
-      }
-    }
-  })
-  return times;
 }
 
 const App = () => {
