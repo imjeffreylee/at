@@ -26,6 +26,7 @@
 
 .avaiable {
   color: rgb(0, 211, 189);
+  cursor: pointer;
 }
 
 .avail-day {
