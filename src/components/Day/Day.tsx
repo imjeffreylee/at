@@ -25,9 +25,9 @@ const Day = ({ day, date, availTimes, bookedTimes }: Props) => {
         <div>{date.split('/')[2]}</div>
       </div>
       <div className="calendar__body__day__time-frame">
-        {newTimeFrames.map((timeFrame, i) => (
+        {newTimeFrames.map((timeFrame) => (
           <div
-            key={i}
+            key={timeFrame}
             className={
               formattedAvailTimes.includes(timeFrame)
                 ? "calendar__body__day__time avaiable"

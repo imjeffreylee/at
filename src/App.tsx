@@ -15,7 +15,7 @@ const App = () => {
   const [week, setWeek] = useState<WeekInfo[]>();
 
   useEffect(() => {
-    const week = getWholeWeek(available);
+    const week = getWholeWeek(booked);
     const weekInfo = week.map((date) => (
       {
         date: date.replaceAll('-', '/'),

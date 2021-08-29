@@ -1,8 +1,8 @@
 import moment from 'moment';
 
-export const getWholeWeek = (available: { start: string, end: string }[]) => {
+export const getWholeWeek = (booked: { start: string, end: string }[]) => {
   const week = new Array(7).fill(null);
-  const targetDate = new Date(available[0].start.split('T')[0]); //get date object from an available date
+  const targetDate = new Date(booked[0].start.split('T')[0]); //get date object from an booked date
   const firstDate = new Date(moment(targetDate).subtract(targetDate.getDay(), 'days').calendar()); //calculate first date of the week
   return week.map((day, index) => moment(firstDate).add(index, 'days').format('YYYY-MM-DD')) //get all dates of the week
 }
@@ -10,14 +10,14 @@ export const getWholeWeek = (available: { start: string, end: string }[]) => {
 export const getTimesIn30Mins = (dateArg: string, timeFramesArray: { start: string, end: string }[]) => {
   const times: string[] = []
   timeFramesArray.forEach(({ start, end }) => {
-    const date = start.split('T')[0];
+    const date = start.split('T')[0]; //get the date
     if (date === dateArg) {
       let startTime = moment(start);
       const endTime = moment(end);
       while (startTime.format('HH-mm') !== endTime.format('HH-mm')) {
         times.push(startTime.format('HH-mm'));
         startTime = startTime.add(30, 'minutes');
-      }
+      } //add 30 mins to start time till it hits end time
     }
   })
   return times;
@@ -45,9 +45,5 @@ export const transformDay = (day: number) => {
 }
 
 export const reorderTimeFrames = (avail: string[], booked: string[]) => {
-  const newAvail = avail.map((time: string) => parseInt(time.replace('-', '')));
-  const newBooked = booked.map((time: string) => parseInt(time.replace('-', '')));
-  const result = newAvail.concat(newBooked).sort((a, b) => a - b).map((time) => time.toString().split(''))
-  result.forEach(time => time.splice(2, 0, ':'))
-  return result.map((time) => time.join(''));
-}
+  return avail.concat(booked).sort().map((time) => time.replace('-', ':'))
+} //combine and sort available and booked times
