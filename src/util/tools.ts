@@ -43,7 +43,3 @@ export const transformDay = (day: number) => {
       return '';
   }
 }
-
-export const reorderTimeFrames = (avail: string[], booked: string[]) => {
-  return avail.concat(booked).sort().map((time) => time.replace('-', ':'))
-} //combine and sort available and booked times

@@ -1,4 +1,4 @@
-import { reorderTimeFrames, transformDay } from '../../util/tools';
+import { transformDay } from '../../util/tools';
 import './Day.css'
 
 interface Props {
@@ -9,8 +9,7 @@ interface Props {
 }
 
 const Day = ({ day, date, availTimes, bookedTimes }: Props) => {
-  const newTimeFrames = reorderTimeFrames(availTimes, bookedTimes);
-  const formattedAvailTimes = availTimes.map(time => time.replace('-', ':'))
+  const allTimeFrames = availTimes.concat(bookedTimes).sort()
 
   return (
     <div className="calendar__body__day">
@@ -25,16 +24,16 @@ const Day = ({ day, date, availTimes, bookedTimes }: Props) => {
         <div>{date.split('/')[2]}</div>
       </div>
       <div className="calendar__body__day__time-frame">
-        {newTimeFrames.map((timeFrame) => (
+        {allTimeFrames.map((timeFrame) => (
           <div
             key={timeFrame}
             className={
-              formattedAvailTimes.includes(timeFrame)
+              availTimes.includes(timeFrame)
                 ? "calendar__body__day__time avaiable"
                 : "calendar__body__day__time"
             }
           >
-            {timeFrame}
+            {timeFrame.replace('-', ':')}
           </div>
         ))}
       </div>
