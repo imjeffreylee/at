@@ -46,7 +46,6 @@ const App = () => {
           {week && <Week info={week} />}
         </div>
       </div>
-
     </div>
   );
 }
